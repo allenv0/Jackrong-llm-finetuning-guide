@@ -102,7 +102,7 @@ The pipeline:
 - Downloads only the MTP source shards listed in the source index.
 - Saves `mtp_heads.safetensors`, updates `model.safetensors.index.json`, and validates all new keys.
 - Converts F16 for quantization and BF16 directly from the prepared HF directory.
-- Runs Qwen ChatML smoke tests with llama-cli before upload when enabled.
+- Runs GGUF smoke tests before upload when enabled. Prefer the model's embedded chat template when llama.cpp supports it; use ChatML only as a minimal fallback for load/generation sanity checks.
 - Lists remote HF files before upload and skips completed GGUFs on resume.
 - Deletes local GGUF files only after confirmed upload when cleanup is enabled.
 
@@ -126,7 +126,7 @@ python3 scripts/qwen_hf_smoke_test.py \
   --prompt "Write one concise sentence about MTP inference."
 ```
 
-For Qwen-family chat formatting, use `apply_chat_template(..., add_generation_prompt=True, tokenize=False)` on the HF side and ChatML-style prompt text for GGUF side.
+For Qwen-family chat formatting, use `apply_chat_template(..., add_generation_prompt=True, tokenize=False)` on the HF side. For GGUF, prefer the chat template embedded by llama.cpp conversion or copied from `tokenizer_config.json`; use raw ChatML only as a fallback smoke test, not as the quality/reasoning benchmark template.
 
 ## Agent Compatibility
 

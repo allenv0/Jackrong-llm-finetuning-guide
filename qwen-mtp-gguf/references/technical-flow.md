@@ -37,7 +37,7 @@ Use F16 as the temporary source for most quantization types. Generate BF16 direc
 
 ## Qwen smoke-test formatting
 
-For HF model smoke tests, format messages through the model tokenizer or processor:
+For HF model smoke tests, format messages through the model tokenizer or processor. For Qwen reasoning models, pass the model-supported thinking/reasoning option when available, for example `enable_thinking=True` or `enable_thinking=False` on tokenizers that expose it:
 
 ```python
 messages = [
@@ -48,7 +48,9 @@ prompt = processor.apply_chat_template(messages, add_generation_prompt=True, tok
 inputs = processor(text=[prompt], return_tensors="pt")
 ```
 
-For GGUF smoke tests with `llama-cli`, use ChatML-style text:
+For GGUF smoke tests, prefer the model's embedded chat template after conversion. llama.cpp usually preserves the tokenizer chat template in GGUF metadata when converting from a complete HF directory. If the local `llama-cli` supports chat/template mode, use that instead of hardcoding prompt markers.
+
+Raw ChatML-style text is only a fallback to verify that the GGUF loads and produces tokens:
 
 ```text
 <|im_start|>system
@@ -57,6 +59,8 @@ You are a helpful AI assistant.<|im_end|>
 State the capital of France.<|im_end|>
 <|im_start|>assistant
 ```
+
+For Qwen3-style reasoning models, a full reasoning test should use the exact template from `tokenizer_config.json`, including any thinking-control behavior. Do not treat a plain ChatML smoke-test answer as a benchmark of reasoning quality.
 
 Default to CPU smoke tests with `-ngl 0`. GPU offload is optional and should be requested explicitly.
 

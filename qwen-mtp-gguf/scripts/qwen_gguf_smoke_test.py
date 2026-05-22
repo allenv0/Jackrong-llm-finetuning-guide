@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CPU smoke test for Qwen-family GGUF files with a ChatML-style prompt."""
+"""CPU GGUF load/generation sanity test using raw ChatML as a fallback prompt."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import subprocess
 from pathlib import Path
 
 
-def qwen_chatml_prompt(user_prompt: str, system_prompt: str) -> str:
+def fallback_chatml_prompt(user_prompt: str, system_prompt: str) -> str:
     return (
         f"<|im_start|>system\n{system_prompt}<|im_end|>\n"
         f"<|im_start|>user\n{user_prompt}<|im_end|>\n"
@@ -39,7 +39,7 @@ def main() -> None:
         "-m",
         str(model),
         "-p",
-        qwen_chatml_prompt(args.prompt, args.system_prompt),
+        fallback_chatml_prompt(args.prompt, args.system_prompt),
         "-n",
         str(args.max_tokens),
         "-c",

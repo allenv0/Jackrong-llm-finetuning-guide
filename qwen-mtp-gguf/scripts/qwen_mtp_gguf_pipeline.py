@@ -816,7 +816,7 @@ def quantize(job: Job, llama_cpp: Path, f16_path: Path, qtype: str, output_path:
     )
 
 
-def qwen_chatml_prompt(user_prompt: str, system_prompt: str) -> str:
+def fallback_chatml_prompt(user_prompt: str, system_prompt: str) -> str:
     return (
         f"<|im_start|>system\n{system_prompt}<|im_end|>\n"
         f"<|im_start|>user\n{user_prompt}<|im_end|>\n"
@@ -841,7 +841,7 @@ def smoke_test_gguf(
         "-m",
         str(model_path),
         "-p",
-        qwen_chatml_prompt(prompt, system_prompt),
+        fallback_chatml_prompt(prompt, system_prompt),
         "-n",
         str(max_tokens),
         "-c",

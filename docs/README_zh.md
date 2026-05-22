@@ -110,7 +110,7 @@
 | :--- | :--- | :--- |
 | 🧭 **预检环境** | 检查 RAM、磁盘、llama.cpp 工具、Hugging Face 权限，以及目标/源模型 config 兼容性。 | 在下载大模型或长时间转换前提前拦截不可行任务。 |
 | 🧩 **提取 MTP** | 只下载包含 MTP/nextn tensors 的源模型 shards，并注入目标模型索引。 | 避免为了少量 MTP heads 下载完整源模型。 |
-| 🧪 **本地验证** | 对生成的 GGUF 文件运行 Qwen ChatML smoke test。 | 在公开发布前发现转换损坏或运行失败的问题。 |
+| 🧪 **本地验证** | 对生成的 GGUF 文件运行 smoke test，优先使用模型 chat template，只把原始 ChatML 作为兜底 sanity check。 | 在公开发布前发现转换损坏或运行失败的问题。 |
 | 📦 **发布流程** | 构建 F16/BF16 和常见 K/IQ 量化格式，并支持 stream 上传、重试、续传检查和清理。 | 让大模型 GGUF 发布在磁盘有限的机器上也更可控。 |
 
 ### 🚀 核心优势

@@ -13,7 +13,7 @@ flowchart TD
   F -- "No" --> G["Download minimal MTP shards and save mtp_heads.safetensors"]
   G --> H["Inject keys into model.safetensors.index.json"]
   H --> I["Convert temporary F16 GGUF"]
-  I --> J["Local Qwen ChatML smoke test"]
+  I --> J["Local GGUF smoke test using model chat template"]
   J --> K{"Smoke test passes?"}
   K -- "No" --> L["Stop before upload"]
   K -- "Yes" --> M["Quantize requested GGUF formats"]
@@ -67,7 +67,7 @@ prompt = processor.apply_chat_template(messages, add_generation_prompt=True, tok
 inputs = processor(text=[prompt], return_tensors="pt")
 ```
 
-GGUF-side tests use Qwen/ChatML prompt text:
+GGUF-side tests should prefer the chat template embedded in the GGUF metadata or the original `tokenizer_config.json`. Plain Qwen/ChatML text is a fallback for load/generation sanity checks:
 
 ```text
 <|im_start|>system
@@ -76,6 +76,8 @@ You are a helpful AI assistant.<|im_end|>
 State the capital of France.<|im_end|>
 <|im_start|>assistant
 ```
+
+For Qwen reasoning models, use the exact tokenizer template and its thinking-control option when judging reasoning behavior. Plain ChatML is enough to catch broken conversion, but not enough to validate reasoning quality.
 
 ## Release Checklist
 

@@ -110,7 +110,7 @@ All Qwopus MTP releases are completed and tested through the following conversio
 | :--- | :--- | :--- |
 | 🧭 **Preflight** | RAM、disk、llama.cpp tools、Hugging Face access、target/source config compatibility を確認します。 | 大きなダウンロードや長い変換の前に、実行できない作業を止めます。 |
 | 🧩 **MTP Extraction** | MTP/nextn tensors を含む source shards だけをダウンロードし、target model index に注入します。 | 少量の MTP heads のために source model 全体を取得する必要を減らします。 |
-| 🧪 **Local Validation** | 生成された GGUF ファイルに Qwen ChatML smoke test を実行します。 | 公開リリース前に壊れた変換結果を検出します。 |
+| 🧪 **Local Validation** | 生成された GGUF ファイルに smoke test を実行し、model chat template を優先し、raw ChatML は fallback sanity check としてのみ使います。 | 公開リリース前に壊れた変換結果を検出します。 |
 | 📦 **Release Workflow** | F16/BF16 と一般的な K/IQ quant 形式を作成し、stream upload、retry、resume check、cleanup をサポートします。 | ディスク容量が限られたマシンでも大規模 GGUF リリースを進めやすくします。 |
 
 ### 🚀 Key Advantages

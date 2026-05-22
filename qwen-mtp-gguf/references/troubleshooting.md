@@ -43,7 +43,8 @@
 
 - Confirm `llama-cli` exists and the GGUF path is correct.
 - Try `-ngl 0` to avoid GPU backend issues.
-- Verify the prompt format uses Qwen/ChatML markers or the model's embedded chat template.
+- Verify the prompt format uses the model's embedded chat template. Use plain Qwen/ChatML markers only as a fallback sanity test.
+- For reasoning models, confirm that thinking/reasoning mode is enabled or disabled using the model's own chat template controls before judging answer quality.
 - If F16 smoke test fails before quantization, do not upload downstream quants.
 
 ## Upload failures

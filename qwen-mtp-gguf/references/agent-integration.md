@@ -54,7 +54,7 @@ Target model: <target repo or path>
 MTP source model: <matching base repo>
 Output: <HF repo or local-only>
 Quant types: <list or default full matrix>
-First bootstrap missing dependencies, then run preflight. Stop and summarize if disk, RAM, llama.cpp, token, or config compatibility checks fail. If preflight passes, inject missing MTP heads, convert to GGUF, run a local Qwen ChatML smoke test, then quantize and upload using the selected strategy.
+First bootstrap missing dependencies, then run preflight. Stop and summarize if disk, RAM, llama.cpp, token, or config compatibility checks fail. If preflight passes, inject missing MTP heads, convert to GGUF, run a local smoke test using the model's embedded chat template when available, then quantize and upload using the selected strategy.
 ```
 
 ## Agent-specific notes

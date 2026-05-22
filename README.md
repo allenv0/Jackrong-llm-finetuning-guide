@@ -110,7 +110,7 @@ All Qwopus MTP releases are completed and tested through the following conversio
 | :--- | :--- | :--- |
 | 🧭 **Preflight** | Checks RAM, disk, llama.cpp tools, Hugging Face access, and target/source config compatibility. | Stops unsafe runs before large model downloads or long conversions begin. |
 | 🧩 **MTP Extraction** | Downloads only shards containing MTP/nextn tensors and injects them into the target model index. | Avoids full source-model downloads when only MTP heads are needed. |
-| 🧪 **Local Validation** | Runs Qwen ChatML smoke tests on generated GGUF files before upload. | Catches broken conversions before public release artifacts are published. |
+| 🧪 **Local Validation** | Runs GGUF smoke tests, preferring the model chat template and using raw ChatML only as a fallback sanity check. | Catches broken conversions before public release artifacts are published. |
 | 📦 **Release Workflow** | Builds F16/BF16 and common K/IQ quant formats, then supports stream upload, retries, resume checks, and cleanup. | Makes large GGUF releases practical on disk-limited machines. |
 
 ### 🚀 Key Advantages

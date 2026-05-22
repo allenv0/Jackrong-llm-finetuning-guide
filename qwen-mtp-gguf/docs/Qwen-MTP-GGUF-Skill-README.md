@@ -31,7 +31,7 @@ language:
       <div style="border:1px solid #e2e8f0;border-radius:8px;padding:14px;background:#f8fafc;"><strong>Plans before download</strong><br/>Reads model metadata, estimates disk/RAM, checks tools, and blocks unsafe runs before large files are pulled.</div>
       <div style="border:1px solid #e2e8f0;border-radius:8px;padding:14px;background:#f8fafc;"><strong>Extracts minimal MTP shards</strong><br/>Uses the source model index to download only shards containing `mtp` or `nextn` tensors.</div>
       <div style="border:1px solid #e2e8f0;border-radius:8px;padding:14px;background:#f8fafc;"><strong>Builds release GGUFs</strong><br/>Converts F16/BF16 with llama.cpp and quantizes into common K/IQ release formats.</div>
-      <div style="border:1px solid #e2e8f0;border-radius:8px;padding:14px;background:#f8fafc;"><strong>Validates before upload</strong><br/>Runs Qwen ChatML smoke tests, resumes uploads, and deletes local files only after confirmed upload.</div>
+      <div style="border:1px solid #e2e8f0;border-radius:8px;padding:14px;background:#f8fafc;"><strong>Validates before upload</strong><br/>Runs GGUF smoke tests with model chat templates when available, resumes uploads, and deletes local files only after confirmed upload.</div>
     </div>
   </div>
 </div>
